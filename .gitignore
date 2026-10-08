@@ -1,0 +1,17 @@
+# game / loader binaries: never commit
+lib/
+Valheim Assemblies/
+BepinEx files/
+*.dll
+# local only
+_to_delete/
+Cloak Cost and Effect Table.md
+# build output
+bin/
+obj/
+build/*
+!build/Cloakcraft.dll
+tests/bin/
+tests/obj/
+.vs/
+*.user

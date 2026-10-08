@@ -1,0 +1,537 @@
+{
+  "ConfigVersion": 18,
+  "General": {
+    "Enabled": true,
+    "DebugLogging": false,
+    "CraftingStation": "piece_workbench",
+    "UseCloakStation": true,
+    "UnlockCapeOfOdin": false,
+    "UseNearbyChests": false,
+    "ChestRadius": 10,
+    "_comment_UseNearbyChests": "true lets the bench count and take materials from chests you can open within ChestRadius metres. Off by default."
+  },
+  "_comment_CloakTiers": "Cloak prefab name -> tier (1 to 6). Tier sets which treatments a cloak takes: 1 Simple, 2 Weathered, 4 Hardened, 5 Storm-worn, 6 Odin's Gift. Any Shoulder item not listed uses Default.",
+  "CloakTiers": {
+    "Default": 1,
+    "CapeDeerHide": 1,
+    "CapeTrollHide": 2,
+    "CapeWolf": 3,
+    "CapeLox": 4,
+    "CapeLinen": 4,
+    "CapeFeather": 4,
+    "CapeAsh": 5,
+    "CapeAsksvin": 5,
+    "CapeDeepNorth": 6,
+    "CapeDeepNorthMage": 6,
+    "CapeOD": 7
+  },
+  "_comment_TierMultiplier": "How much of a treatment's potential each cloak tier realises. Scales numeric effect strength (speed, fall damage, armour...). Tier 6 goes past full potential. Resistance-type effects use ResistanceByTier below.",
+  "TierMultiplier": {
+    "1": 0.6,
+    "2": 0.7,
+    "3": 0.8,
+    "4": 0.9,
+    "5": 1.0,
+    "6": 1.15,
+    "7": 1.4
+  },
+  "_comment_ResistanceByTier": "For damage-resistance treatments (Toxin Ward, Frostbound, Emberbound). Valid: SlightlyResistant, Resistant, VeryResistant, Immune.",
+  "ResistanceByTier": {
+    "1": "SlightlyResistant",
+    "2": "SlightlyResistant",
+    "3": "Resistant",
+    "4": "Resistant",
+    "5": "VeryResistant",
+    "6": "VeryResistant",
+    "7": "Immune"
+  },
+  "_comment_Augmentations": "TimerMode: Continuous (always ticks) or RelevantCondition (ticks only while the effect's condition applies: rain for Rainproof, cold for Frostbound, swimming for Seabound). Levels: Simple, Weathered, Hardened, Storm-worn, Odin's Gift. Each sets the material cost, buys more time (base x 1.0 / 1.25 / 1.5 / 1.75 / 2.0) and needs a cloak of at least MinCloakTier (1, 2, 4, 5, 6). Extra lists additional materials for a level ([{\"Prefab\":\"AsksvinSkin\",\"Amount\":1}]); unknown prefabs are skipped with a warning (find names with: cloakcraft items <text>). Name is the display text; the key is used in saves, keep it stable. Strength is the base effect value before TierMultiplier. Name and Description are display text; the key is fixed (used in saves and icon filenames).",
+  "Augmentations": {
+    "Rainproof": {
+      "Name": "Rainseal",
+      "Description": "Rain no longer makes you Wet. Timer only runs in the rain.",
+      "Enabled": true,
+      "Material": "Resin",
+      "TimerMode": "RelevantCondition",
+      "Strength": 1.0,
+      "Levels": {
+        "Simple": {
+          "Name": "Simple",
+          "Cost": 5,
+          "DurationMinutes": 20.0,
+          "MinCloakTier": 1,
+          "Extra": []
+        },
+        "Weathered": {
+          "Name": "Weathered",
+          "Cost": 20,
+          "DurationMinutes": 25.0,
+          "MinCloakTier": 2,
+          "Extra": []
+        },
+        "Hardened": {
+          "Name": "Hardened",
+          "Cost": 35,
+          "DurationMinutes": 30.0,
+          "MinCloakTier": 4,
+          "Extra": []
+        },
+        "StormWorn": {
+          "Name": "Storm-worn",
+          "Cost": 50,
+          "DurationMinutes": 35.0,
+          "MinCloakTier": 5,
+          "Extra": []
+        },
+        "OdinsGift": {
+          "Name": "Odin's Gift",
+          "Cost": 75,
+          "DurationMinutes": 40.0,
+          "MinCloakTier": 6,
+          "Extra": []
+        }
+      }
+    },
+    "ToxinWard": {
+      "Name": "Honeyward",
+      "Description": "Resist Poison damage.",
+      "Enabled": true,
+      "Material": "Honey",
+      "TimerMode": "Continuous",
+      "Strength": 1.0,
+      "Levels": {
+        "Simple": {
+          "Name": "Simple",
+          "Cost": 5,
+          "DurationMinutes": 15.0,
+          "MinCloakTier": 1,
+          "Extra": []
+        },
+        "Weathered": {
+          "Name": "Weathered",
+          "Cost": 15,
+          "DurationMinutes": 18.8,
+          "MinCloakTier": 2,
+          "Extra": []
+        },
+        "Hardened": {
+          "Name": "Hardened",
+          "Cost": 25,
+          "DurationMinutes": 22.5,
+          "MinCloakTier": 4,
+          "Extra": []
+        },
+        "StormWorn": {
+          "Name": "Storm-worn",
+          "Cost": 40,
+          "DurationMinutes": 26.2,
+          "MinCloakTier": 5,
+          "Extra": []
+        },
+        "OdinsGift": {
+          "Name": "Odin's Gift",
+          "Cost": 60,
+          "DurationMinutes": 30.0,
+          "MinCloakTier": 6,
+          "Extra": []
+        }
+      }
+    },
+    "Frostbound": {
+      "Name": "Frostthread",
+      "Description": "Resist Frost damage. Timer only runs in the cold.",
+      "Enabled": true,
+      "Material": "FreezeGland",
+      "TimerMode": "RelevantCondition",
+      "Strength": 1.0,
+      "Levels": {
+        "Simple": {
+          "Name": "Simple",
+          "Cost": 2,
+          "DurationMinutes": 20.0,
+          "MinCloakTier": 1,
+          "Extra": []
+        },
+        "Weathered": {
+          "Name": "Weathered",
+          "Cost": 6,
+          "DurationMinutes": 25.0,
+          "MinCloakTier": 2,
+          "Extra": []
+        },
+        "Hardened": {
+          "Name": "Hardened",
+          "Cost": 10,
+          "DurationMinutes": 30.0,
+          "MinCloakTier": 4,
+          "Extra": []
+        },
+        "StormWorn": {
+          "Name": "Storm-worn",
+          "Cost": 15,
+          "DurationMinutes": 35.0,
+          "MinCloakTier": 5,
+          "Extra": []
+        },
+        "OdinsGift": {
+          "Name": "Odin's Gift",
+          "Cost": 23,
+          "DurationMinutes": 40.0,
+          "MinCloakTier": 6,
+          "Extra": []
+        }
+      }
+    },
+    "Emberbound": {
+      "Name": "Emberstitch",
+      "Description": "Resist Fire damage.",
+      "Enabled": true,
+      "Material": "SurtlingCore",
+      "TimerMode": "Continuous",
+      "Strength": 1.0,
+      "Levels": {
+        "Simple": {
+          "Name": "Simple",
+          "Cost": 1,
+          "DurationMinutes": 15.0,
+          "MinCloakTier": 1,
+          "Extra": []
+        },
+        "Weathered": {
+          "Name": "Weathered",
+          "Cost": 3,
+          "DurationMinutes": 18.8,
+          "MinCloakTier": 2,
+          "Extra": []
+        },
+        "Hardened": {
+          "Name": "Hardened",
+          "Cost": 5,
+          "DurationMinutes": 22.5,
+          "MinCloakTier": 4,
+          "Extra": []
+        },
+        "StormWorn": {
+          "Name": "Storm-worn",
+          "Cost": 8,
+          "DurationMinutes": 26.2,
+          "MinCloakTier": 5,
+          "Extra": [
+            {
+              "Prefab": "FlametalOreNew",
+              "Amount": 1
+            }
+          ]
+        },
+        "OdinsGift": {
+          "Name": "Odin's Gift",
+          "Cost": 12,
+          "DurationMinutes": 30.0,
+          "MinCloakTier": 6,
+          "Extra": []
+        }
+      }
+    },
+    "Lightweave": {
+      "Name": "Lightweave",
+      "Description": "Take less fall damage and jump a little higher.",
+      "Enabled": true,
+      "Material": "Feathers",
+      "TimerMode": "Continuous",
+      "Strength": 0.75,
+      "_comment_Strength": "Strength: fraction of fall damage removed at tier 5 (0.75 = 75 percent less). JumpStrength: extra jump height at tier 5 (0.1 = 10 percent). Both scale with TierMultiplier.",
+      "Levels": {
+        "Simple": {
+          "Name": "Simple",
+          "Cost": 5,
+          "DurationMinutes": 15.0,
+          "MinCloakTier": 1,
+          "Extra": []
+        },
+        "Weathered": {
+          "Name": "Weathered",
+          "Cost": 20,
+          "DurationMinutes": 18.8,
+          "MinCloakTier": 2,
+          "Extra": []
+        },
+        "Hardened": {
+          "Name": "Hardened",
+          "Cost": 35,
+          "DurationMinutes": 22.5,
+          "MinCloakTier": 4,
+          "Extra": []
+        },
+        "StormWorn": {
+          "Name": "Storm-worn",
+          "Cost": 50,
+          "DurationMinutes": 26.2,
+          "MinCloakTier": 5,
+          "Extra": [
+            {
+              "Prefab": "VoltureFeather",
+              "Amount": 1
+            }
+          ]
+        },
+        "OdinsGift": {
+          "Name": "Odin's Gift",
+          "Cost": 75,
+          "DurationMinutes": 30.0,
+          "MinCloakTier": 6,
+          "Extra": []
+        }
+      },
+      "JumpStrength": 0.1
+    },
+    "Fleetfoot": {
+      "Name": "Fleetfoot",
+      "Description": "Move faster.",
+      "Enabled": true,
+      "Material": "TrollHide",
+      "TimerMode": "Continuous",
+      "Strength": 0.15,
+      "_comment_Strength": "Movement speed bonus at tier 5 (0.15 = 15 percent faster).",
+      "Levels": {
+        "Simple": {
+          "Name": "Simple",
+          "Cost": 1,
+          "DurationMinutes": 10.0,
+          "MinCloakTier": 1,
+          "Extra": []
+        },
+        "Weathered": {
+          "Name": "Weathered",
+          "Cost": 3,
+          "DurationMinutes": 12.5,
+          "MinCloakTier": 2,
+          "Extra": []
+        },
+        "Hardened": {
+          "Name": "Hardened",
+          "Cost": 5,
+          "DurationMinutes": 15.0,
+          "MinCloakTier": 4,
+          "Extra": []
+        },
+        "StormWorn": {
+          "Name": "Storm-worn",
+          "Cost": 8,
+          "DurationMinutes": 17.5,
+          "MinCloakTier": 5,
+          "Extra": [
+            {
+              "Prefab": "AsksvinSkin",
+              "Amount": 1
+            }
+          ]
+        },
+        "OdinsGift": {
+          "Name": "Odin's Gift",
+          "Cost": 12,
+          "DurationMinutes": 20.0,
+          "MinCloakTier": 6,
+          "Extra": []
+        }
+      }
+    },
+    "Seabound": {
+      "Name": "Tidescale",
+      "Description": "Swimming uses less stamina. Timer only runs while swimming.",
+      "Enabled": true,
+      "Material": "SerpentScale",
+      "TimerMode": "RelevantCondition",
+      "Strength": 0.6,
+      "_comment_Strength": "Fraction of swim stamina cost removed at tier 5.",
+      "Levels": {
+        "Simple": {
+          "Name": "Simple",
+          "Cost": 1,
+          "DurationMinutes": 20.0,
+          "MinCloakTier": 1,
+          "Extra": []
+        },
+        "Weathered": {
+          "Name": "Weathered",
+          "Cost": 3,
+          "DurationMinutes": 25.0,
+          "MinCloakTier": 2,
+          "Extra": []
+        },
+        "Hardened": {
+          "Name": "Hardened",
+          "Cost": 5,
+          "DurationMinutes": 30.0,
+          "MinCloakTier": 4,
+          "Extra": []
+        },
+        "StormWorn": {
+          "Name": "Storm-worn",
+          "Cost": 7,
+          "DurationMinutes": 35.0,
+          "MinCloakTier": 5,
+          "Extra": []
+        },
+        "OdinsGift": {
+          "Name": "Odin's Gift",
+          "Cost": 11,
+          "DurationMinutes": 40.0,
+          "MinCloakTier": 6,
+          "Extra": []
+        }
+      }
+    },
+    "Ironbound": {
+      "Name": "Ironweft",
+      "Description": "More armour, less stagger.",
+      "Enabled": true,
+      "Material": "BlackMetal",
+      "TimerMode": "Continuous",
+      "Strength": 0.2,
+      "_comment_Strength": "Armour bonus at tier 5 (0.2 = 20 percent more armour). Stagger taken is reduced by the same fraction.",
+      "Levels": {
+        "Simple": {
+          "Name": "Simple",
+          "Cost": 5,
+          "DurationMinutes": 10.0,
+          "MinCloakTier": 1,
+          "Extra": []
+        },
+        "Weathered": {
+          "Name": "Weathered",
+          "Cost": 8,
+          "DurationMinutes": 12.5,
+          "MinCloakTier": 2,
+          "Extra": []
+        },
+        "Hardened": {
+          "Name": "Hardened",
+          "Cost": 12,
+          "DurationMinutes": 15.0,
+          "MinCloakTier": 4,
+          "Extra": []
+        },
+        "StormWorn": {
+          "Name": "Storm-worn",
+          "Cost": 15,
+          "DurationMinutes": 17.5,
+          "MinCloakTier": 5,
+          "Extra": []
+        },
+        "OdinsGift": {
+          "Name": "Odin's Gift",
+          "Cost": 23,
+          "DurationMinutes": 20.0,
+          "MinCloakTier": 6,
+          "Extra": []
+        }
+      }
+    }
+  },
+  "VisualEffects": {
+    "Enabled": true,
+    "_comment": "MVP visual is a subtle cloak tint per augmentation. Colours are RGBA 0-1. Set Enabled false to disable.",
+    "TintStrength": 0.35,
+    "Tints": {
+      "Rainproof": [
+        0.55,
+        0.55,
+        0.6,
+        1.0
+      ],
+      "ToxinWard": [
+        0.9,
+        0.8,
+        0.3,
+        1.0
+      ],
+      "Frostbound": [
+        0.6,
+        0.8,
+        1.0,
+        1.0
+      ],
+      "Emberbound": [
+        1.0,
+        0.5,
+        0.2,
+        1.0
+      ],
+      "Lightweave": [
+        1.0,
+        1.0,
+        0.9,
+        1.0
+      ],
+      "Fleetfoot": [
+        0.5,
+        0.8,
+        0.5,
+        1.0
+      ],
+      "Seabound": [
+        0.3,
+        0.6,
+        0.9,
+        1.0
+      ],
+      "Ironbound": [
+        0.4,
+        0.4,
+        0.45,
+        1.0
+      ]
+    },
+    "_comment_Particles": "Particle effect per augmentation, borrowed from the game. Source: prefab:<Name> (first particle system in that prefab), prefab:<Name>/<ChildPath>, or env:<WeatherName>. Find names in game with: cloakcraft fx list <text>. Tint overrides the particle colour (RGBA 0-1). OnlyWhileTicking pauses emission when a conditional timer is paused. Remove an entry to disable.",
+    "Particles": {
+      "Lightweave": {
+        "Source": "se:SlowFall",
+        "Scale": 1.0,
+        "Emission": 1.0,
+        "Glow": 2.0,
+        "LightRange": 2.0,
+        "LightIntensity": 0.3
+      },
+      "ToxinWard": {
+        "Source": "env:Snow",
+        "Scale": 0.08,
+        "Emission": 0.15,
+        "Tint": [
+          0.35,
+          1.0,
+          0.3,
+          0.8
+        ],
+        "Glow": 2.0,
+        "LightRange": 2.0,
+        "LightIntensity": 0.3
+      },
+      "Frostbound": {
+        "Source": "prefab:StaffIceShards",
+        "Scale": 0.6,
+        "Emission": 0.5,
+        "OnlyWhileTicking": true,
+        "Glow": 2.0,
+        "LightRange": 2.0,
+        "LightIntensity": 0.3
+      },
+      "Rainproof": {
+        "Source": "env:Rain",
+        "Scale": 0.06,
+        "Emission": 0.2,
+        "OnlyWhileTicking": true,
+        "Glow": 2.0,
+        "LightRange": 2.0,
+        "LightIntensity": 0.3
+      },
+      "Emberbound": {
+        "Source": "prefab:StaffFireball",
+        "Scale": 0.6,
+        "Emission": 0.5,
+        "Glow": 2.0,
+        "LightRange": 2.0,
+        "LightIntensity": 0.3
+      }
+    }
+  }
+}
