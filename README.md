@@ -1,5 +1,7 @@
 # Cloakcraft
 
+![Cloakcraft: treat, adapt, endure. Eight cloak treatments from Rainseal to Ironweft](assets/promo.jpg)
+
 Valheim 1.0.17 mod (BepInEx 5). Treat your cloak with vanilla materials for a temporary effect: rain, poison, frost, fire, falls, speed, swimming, armour. Requirements: `docs/PRD.md`. Original design: `CLOAKCRAFT-PROJECT.md`. Verified game API: `docs/API-NOTES.md`.
 
 **Status: v0.7.14, pre-release. Works in game; balance and multiplayer untested.**
