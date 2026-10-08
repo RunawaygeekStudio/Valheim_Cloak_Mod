@@ -1,6 +1,6 @@
 # Cloakcraft PRD
 
-Valheim mod: temporary cloak treatments crafted from vanilla materials. Status: v0.7.14, pre-release. Owner: Ben Shirley. Target: Valheim 1.0.17, BepInEx 5.x. Repo: github.com/RunawaygeekStudio/valheim_cloak_mod (MIT).
+Valheim mod: temporary cloak treatments crafted from vanilla materials. Status: v0.7.35, pre-release. Owner: Ben Shirley. Target: Valheim 1.0.17, BepInEx 5.x. Repo: github.com/RunawaygeekStudio/valheim_cloak_mod (MIT).
 
 ## 1. Problem
 
@@ -123,7 +123,7 @@ Veilbound (Wraith, stealth), Mistwalker (Eitr + Wisps), Drakescale (Dragon Scale
 | F16 | Nearby-chest materials, off by default (`UseNearbyChests`, `ChestRadius`). **Done 0.7.1** |
 | F17 | Per-cloak treating station from the cloak's recipe (`UseCloakStation`). **Done 0.7.11** |
 | F18 | Cape of Odin: tier 7, DLC unlock switch. **Done 0.7.12** |
-| F13 | Particles ride on the status effect's `m_startEffects`, exactly as the feather cape's SlowFall does (networked, removed with the effect). Sources: `se:<status effect>`, `env:<weather>`, `prefab:<item>` (particle subtree only). Per entry: Scale, Emission, Glow (particle size), Tint, LightRange/LightIntensity (dim wisp-style point light, donor lights stripped), OnlyWhileTicking. Defaults: Lightweave se:SlowFall, Emberstitch prefab:StaffFireball, Frostthread prefab:StaffIceShards, Honeyward env:Snow green, Rainseal env:Rain. **Done 0.7.14**; Fleetfoot, Tidescale, Ironweft sources to pick |
+| F13 | Particles: a vanilla particle prefab cloned (inactive, scripts stripped) under the wearer's `Spine1` bone and tuned from config. The rig's bones carry a 95x scale, which is divided out so metres are metres. Sources: `ext:` (the workbench-extension sparkle, used by all eight), `se:<status effect>`, `prefab:<item>` (particle subtree). Per entry: Scale, Emission, Glow, Tint (vertex colour, gradient and material), Bone, Offset, Spread (emitter box), Drift, Speed, Only, LightRange/LightIntensity, OnlyWhileTicking. **Done 0.7.35** |
 | F14 | Tooltip line on augmented cloaks in inventory and chests |
 | F15 | Multiplayer check: effect local to owner, state syncs with item; dedicated server smoke test |
 
@@ -146,7 +146,7 @@ Restrained. Cloak tint per treatment (config RGBA, strength 0.35). Particles sma
 
 ### 5.5 Config surface (`BepInEx/config/Cloakcraft.json`)
 
-`General` (Enabled, DebugLogging, CraftingStation, UseCloakStation, UnlockCapeOfOdin, UseNearbyChests, ChestRadius), `CloakTiers` (1-7), `TierMultiplier`, `ResistanceByTier`, `Augmentations.<key>` (Name, Description, Material, TimerMode, Strength, JumpStrength, Levels.<key>.{Name, Cost, Extra[], DurationMinutes, MinCloakTier}), `VisualEffects` (Enabled, TintStrength, Tints, Particles.<key>.{Source, Scale, Emission, Glow, Tint, LightRange, LightIntensity, OnlyWhileTicking}). ConfigVersion 18.
+`General` (Enabled, DebugLogging, CraftingStation, UseCloakStation, UnlockCapeOfOdin, UseNearbyChests, ChestRadius), `CloakTiers` (1-7), `TierMultiplier`, `ResistanceByTier`, `Augmentations.<key>` (Name, Description, Material, TimerMode, Strength, JumpStrength, Levels.<key>.{Name, Cost, Extra[], DurationMinutes, MinCloakTier}), `VisualEffects` (Enabled, TintStrength, Tints, Particles.<key>.{Source, Scale, Emission, Glow, Tint, Bone, Offset, Spread, Drift, Speed, Only, LightRange, LightIntensity, OnlyWhileTicking}). ConfigVersion 32.
 
 ## 6. Technical summary
 
@@ -171,6 +171,7 @@ Restrained. Cloak tint per treatment (config RGBA, strength 0.35). Particles sma
 | 08 Oct | Bench UI rebuilt inside the vanilla crafting panel instead of an overlay; chest sourcing added, off by default |
 | 08 Oct | Row detail moved from tooltips to a detail zone under each column (tooltips unreadable on the brown panel) |
 | 08 Oct | Particles via StatusEffect start effects (the feather cape's method), not cloned weather systems |
+| 09 Oct | Reverted: the game's effect spawner left effects loose in the world; now cloned under the Spine1 bone by the mod. Weather sources dropped (read as mist); all treatments on the workbench-extension sparkle, tinted |
 | 08 Oct | Treating station = the cloak's own recipe station; Cape of Odin kept at the top as tier 7 with an unlock switch |
 
 ## 8. Open items
@@ -182,7 +183,7 @@ Restrained. Cloak tint per treatment (config RGBA, strength 0.35). Particles sma
 | Station-level gating (`StationLevelBonus`) go / no-go | Ben |
 | AUGMENT tab gold frame; needs the hierarchy dump from the log | Claude |
 | Balance: cost curve vs duration (15x cost for 2x time); consider 2x / 2.5x at the top | Ben, after play |
-| Particle look: Scale / Emission / Glow / light per treatment; Fleetfoot, Tidescale, Ironweft sources | Ben, in game |
+| Particle look per treatment (all share one source now; vary Spread / Drift per theme later) | Ben, in game |
 
 ## 9. Release checklist (v1.0)
 

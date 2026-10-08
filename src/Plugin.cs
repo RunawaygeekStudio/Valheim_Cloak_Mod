@@ -11,7 +11,7 @@ namespace Cloakcraft
     {
         public const string ModGuid = "BenShirley.Cloakcraft";
         public const string ModName = "Cloakcraft";
-        public const string ModVersion = "0.7.14";
+        public const string ModVersion = "0.7.35";
 
         internal static ManualLogSource Log = null!;
         Harmony? harmony;

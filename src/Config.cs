@@ -53,7 +53,7 @@ namespace Cloakcraft
 
     public class Config
     {
-        public const int CurrentVersion = 18;
+        public const int CurrentVersion = 32;
         public int ConfigVersion = 0;
         public GeneralConfig General = new GeneralConfig();
         public Dictionary<string, int> CloakTiers = new Dictionary<string, int>();

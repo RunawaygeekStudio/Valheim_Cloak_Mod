@@ -1,5 +1,5 @@
 {
-  "ConfigVersion": 18,
+  "ConfigVersion": 32,
   "General": {
     "Enabled": true,
     "DebugLogging": false,
@@ -484,53 +484,250 @@
     },
     "_comment_Particles": "Particle effect per augmentation, borrowed from the game. Source: prefab:<Name> (first particle system in that prefab), prefab:<Name>/<ChildPath>, or env:<WeatherName>. Find names in game with: cloakcraft fx list <text>. Tint overrides the particle colour (RGBA 0-1). OnlyWhileTicking pauses emission when a conditional timer is paused. Remove an entry to disable.",
     "Particles": {
-      "Lightweave": {
-        "Source": "se:SlowFall",
+      "Rainproof": {
+        "Source": "ext:",
         "Scale": 1.0,
-        "Emission": 1.0,
-        "Glow": 2.0,
+        "Emission": 0.5,
+        "Glow": 1.5,
+        "Tint": [
+          0.45,
+          0.7,
+          1.0,
+          0.9
+        ],
         "LightRange": 2.0,
-        "LightIntensity": 0.3
+        "LightIntensity": 0.3,
+        "Bone": "Spine1",
+        "Offset": [
+          0,
+          -0.15,
+          -0.3
+        ],
+        "OnlyWhileTicking": true,
+        "Spread": [
+          0.5,
+          0.9,
+          0.25
+        ],
+        "Speed": 0.08,
+        "Drift": [
+          0,
+          -0.08,
+          -0.15
+        ]
       },
       "ToxinWard": {
-        "Source": "env:Snow",
-        "Scale": 0.08,
-        "Emission": 0.15,
+        "Source": "ext:",
+        "Scale": 1.0,
+        "Emission": 0.5,
+        "Glow": 1.5,
         "Tint": [
           0.35,
           1.0,
           0.3,
-          0.8
+          0.9
         ],
-        "Glow": 2.0,
         "LightRange": 2.0,
-        "LightIntensity": 0.3
+        "LightIntensity": 0.3,
+        "Bone": "Spine1",
+        "Offset": [
+          0,
+          -0.15,
+          -0.3
+        ],
+        "Spread": [
+          0.5,
+          0.9,
+          0.25
+        ],
+        "Speed": 0.08,
+        "Drift": [
+          0,
+          -0.08,
+          -0.15
+        ]
       },
       "Frostbound": {
-        "Source": "prefab:StaffIceShards",
-        "Scale": 0.6,
+        "Source": "ext:",
+        "Scale": 1.0,
         "Emission": 0.5,
-        "OnlyWhileTicking": true,
-        "Glow": 2.0,
+        "Glow": 1.5,
+        "Tint": [
+          0.8,
+          0.95,
+          1.0,
+          0.9
+        ],
         "LightRange": 2.0,
-        "LightIntensity": 0.3
-      },
-      "Rainproof": {
-        "Source": "env:Rain",
-        "Scale": 0.06,
-        "Emission": 0.2,
+        "LightIntensity": 0.3,
+        "Bone": "Spine1",
+        "Offset": [
+          0,
+          -0.15,
+          -0.3
+        ],
         "OnlyWhileTicking": true,
-        "Glow": 2.0,
-        "LightRange": 2.0,
-        "LightIntensity": 0.3
+        "Spread": [
+          0.5,
+          0.9,
+          0.25
+        ],
+        "Speed": 0.08,
+        "Drift": [
+          0,
+          -0.08,
+          -0.15
+        ]
       },
       "Emberbound": {
-        "Source": "prefab:StaffFireball",
-        "Scale": 0.6,
+        "Source": "ext:",
+        "Scale": 1.0,
         "Emission": 0.5,
-        "Glow": 2.0,
+        "Glow": 1.5,
         "LightRange": 2.0,
-        "LightIntensity": 0.3
+        "LightIntensity": 0.3,
+        "Bone": "Spine1",
+        "Offset": [
+          0,
+          -0.15,
+          -0.3
+        ],
+        "Spread": [
+          0.5,
+          0.9,
+          0.25
+        ],
+        "Speed": 0.08,
+        "Drift": [
+          0,
+          -0.08,
+          -0.15
+        ]
+      },
+      "Lightweave": {
+        "Source": "ext:",
+        "Scale": 1.0,
+        "Emission": 0.5,
+        "Glow": 1.5,
+        "Tint": [
+          1.0,
+          0.95,
+          0.7,
+          0.9
+        ],
+        "LightRange": 2.0,
+        "LightIntensity": 0.3,
+        "Bone": "Spine1",
+        "Offset": [
+          0,
+          -0.15,
+          -0.3
+        ],
+        "Spread": [
+          0.5,
+          0.9,
+          0.25
+        ],
+        "Speed": 0.08,
+        "Drift": [
+          0,
+          -0.08,
+          -0.15
+        ]
+      },
+      "Fleetfoot": {
+        "Source": "ext:",
+        "Scale": 1.0,
+        "Emission": 0.5,
+        "Glow": 1.5,
+        "Tint": [
+          0.75,
+          0.9,
+          0.4,
+          0.9
+        ],
+        "LightRange": 2.0,
+        "LightIntensity": 0.3,
+        "Bone": "Spine1",
+        "Offset": [
+          0,
+          -0.15,
+          -0.3
+        ],
+        "Spread": [
+          0.5,
+          0.9,
+          0.25
+        ],
+        "Speed": 0.08,
+        "Drift": [
+          0,
+          -0.08,
+          -0.15
+        ]
+      },
+      "Seabound": {
+        "Source": "ext:",
+        "Scale": 1.0,
+        "Emission": 0.5,
+        "Glow": 1.5,
+        "Tint": [
+          0.2,
+          0.8,
+          0.8,
+          0.9
+        ],
+        "LightRange": 2.0,
+        "LightIntensity": 0.3,
+        "Bone": "Spine1",
+        "Offset": [
+          0,
+          -0.15,
+          -0.3
+        ],
+        "OnlyWhileTicking": true,
+        "Spread": [
+          0.5,
+          0.9,
+          0.25
+        ],
+        "Speed": 0.08,
+        "Drift": [
+          0,
+          -0.08,
+          -0.15
+        ]
+      },
+      "Ironbound": {
+        "Source": "ext:",
+        "Scale": 1.0,
+        "Emission": 0.5,
+        "Glow": 1.5,
+        "Tint": [
+          0.75,
+          0.75,
+          0.85,
+          0.9
+        ],
+        "LightRange": 2.0,
+        "LightIntensity": 0.3,
+        "Bone": "Spine1",
+        "Offset": [
+          0,
+          -0.15,
+          -0.3
+        ],
+        "Spread": [
+          0.5,
+          0.9,
+          0.25
+        ],
+        "Speed": 0.08,
+        "Drift": [
+          0,
+          -0.08,
+          -0.15
+        ]
       }
     }
   }

@@ -14,7 +14,7 @@ namespace Cloakcraft
         public ItemDrop.ItemData? Cloak;   // the cloak this effect belongs to
         public bool Paused;                // conditional timer not currently ticking
 
-        float saveTimer;
+        float saveTimer, spawnedAt;
         List<HitData.DamageModPair> mods = new List<HitData.DamageModPair>();
 
         public static SE_Cloakcraft Create(Augmentation aug)
@@ -45,12 +45,12 @@ namespace Cloakcraft
 
         float Strength => Aug.StrengthFor(Tier);
 
-        /// Particles ride on the status effect's start effects, exactly as the feather cape's SlowFall does.
+        GameObject[] fx = System.Array.Empty<GameObject>();
+
         public override void Setup(Character character)
         {
-            m_startEffects = Fx.EffectsFor(Aug) ?? new EffectList();
             base.Setup(character);
-            Fx.Tune(Aug, m_startEffectInstances);
+            fx = Fx.Spawn(Aug, character); spawnedAt = Time.time;
         }
 
         public void Expire() => m_time = m_ttl + 1f; // SEMan removes it next tick and Stop() clears the cloak
@@ -71,8 +71,10 @@ namespace Cloakcraft
             }
         }
 
+        bool reported;
         public override void UpdateStatusEffect(float dt)
         {
+            if (!reported && Time.time - spawnedAt > 2f) { reported = true; if (Config.Current.General.DebugLogging) Fx.Report(Aug); }
             bool tick = Aug.Cfg.TimerMode == TimerMode.Continuous || ConditionActive();
             if (Paused == tick) Fx.SetTicking(Aug, tick);
             Paused = !tick;
@@ -87,8 +89,13 @@ namespace Cloakcraft
             }
         }
 
+        void KillFx() { foreach (var g in fx) if (g != null) Destroy(g); fx = System.Array.Empty<GameObject>(); }
+
+        public override void OnDestroy() { KillFx(); base.OnDestroy(); }
+
         public override void Stop()
         {
+            KillFx();
             base.Stop();
             if (Cloak != null && IsDone()) CloakState.Clear(Cloak); // expired, not merely unequipped
         }
