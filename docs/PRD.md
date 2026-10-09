@@ -1,6 +1,7 @@
 # Cloakcraft PRD
 
-Valheim mod: temporary cloak treatments crafted from vanilla materials. Status: v0.7.35, pre-release. Owner: Ben Shirley. Target: Valheim 1.0.17, BepInEx 5.x. Repo: github.com/RunawaygeekStudio/valheim_cloak_mod (MIT).
+Valheim mod: temporary cloak treatments crafted from vanilla materials. Status: v0.7.35, pre-release. 
+Target: Valheim 1.0.17, BepInEx 5.x. Repo: github.com/RunawaygeekStudio/valheim_cloak_mod (MIT).
 
 ## 1. Problem
 
